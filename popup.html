@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Conversation Starter</title>
+    <script src="popup.js"></script>
+    <script language="JavaScript" type="text/javascript" src="jquery.min.js"></script>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <h1>Conversation Starter</h1>
+    <form>
+      <label for="article_title">Article Title</label><br>
+      <input type="text" id="article_title" name="article_title" required><br>
+
+      <label for="article_link">Article Link</label><br>
+      <input type="text" id="article_link" name="article_link" required><br><br>
+
+      <p>Choose 3 times where you will be free for 15 minutes<br></p>
+
+      <label for="time_1">Time 1</label><br>
+      <input type="time" id="time_1" name="time_1" required step="900"><br>
+
+      <label for="time_2">Time 2</label><br>
+      <input type="time" id="time_2" name="time_2" required step="900"><br>
+
+      <label for="time_3">Time 3</label><br>
+      <input type="time" id="time_3" name="time_3" required step="900"><br>
+
+
+    </form> <br>
+    <button id="submitForm">Submit!</button>
+  </body>
+</html>
