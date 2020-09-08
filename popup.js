@@ -1,53 +1,26 @@
-var allowed_times = [
-  "12:00AM - 12:30AM",
-  "12:30AM - 1:00AM",
-  "1:00AM - 1:30AM",
-  "1:30AM - 2:00AM",
-  "2:00AM - 2:30AM",
-  "2:30AM - 3:00AM",
-  "3:00AM - 3:30AM",
-  "3:30AM - 4:00AM",
-  "4:00AM - 4:30AM",
-  "4:30AM - 5:00AM",
-  "5:00AM - 5:30AM",
-  "5:30AM - 6:00AM",
-  "6:00AM - 6:30AM",
-  "6:30AM - 7:00AM",
-  "7:00AM - 7:30AM",
-  "7:30AM - 8:00AM",
-  "8:00AM - 8:30AM",
-  "8:30AM - 9:00AM",
-  "9:00AM - 9:30AM",
-  "9:30AM - 10:00AM",
-  "10:00AM - 10:30AM",
-  "10:30AM - 11:00AM",
-  "11:00AM - 11:30AM",
-  "11:30AM - 12:00AM",
-  "12:00PM - 12:30PM",
-  "12:30PM - 1:00PM",
-  "1:00PM - 1:30PM",
-  "1:30PM - 2:00PM",
-  "2:00PM - 2:30PM",
-  "2:30PM - 3:00PM",
-  "3:00PM - 3:30PM",
-  "3:30PM - 4:00PM",
-  "4:00PM - 4:30PM",
-  "4:30PM - 5:00PM",
-  "5:00PM - 5:30PM",
-  "5:30PM - 6:00PM",
-  "6:00PM - 6:30PM",
-  "6:30PM - 7:00PM",
-  "7:00PM - 7:30PM",
-  "7:30PM - 8:00PM",
-  "8:00PM - 8:30PM",
-  "8:30PM - 9:00PM",
-  "9:00PM - 9:30PM",
-  "9:30PM - 10:00PM",
-  "10:00PM - 10:30PM",
-  "10:30PM - 11:00PM",
-  "11:00PM - 11:30PM",
-  "11:30PM - 12:00AM",
-]
+
+
+function times_good(times) {
+  const MINUTES_APART = 30
+
+  console.log(times)
+  for (var idx = 0; idx < times.length; idx++) {
+    for (var idx_2 = 1; idx_2 < times.length; idx_2++) {
+      if (idx != idx_2) {
+        var [hours_1, minutes_1] = times[idx].split(":")
+        var [hours_2, minutes_2] = times[idx_2].split(":")
+
+        var time_1 = hours_1 * 60 + minutes_1
+        var time_2 = hours_2 * 60 + minutes_2
+
+        if (Math.abs(time_1 - time_2) < MINUTES_APART * 60) {
+          return false
+        }
+      }
+    }
+  }
+  return true
+}
 
 document.addEventListener('DOMContentLoaded', function() {
   console.log("Working")
@@ -95,8 +68,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
       if (!payload_good) {
         alert("Please fill all values")
-      } else {
+      } else if (!times_good([time_1, time_2, time_3])) {
+        alert("Ensure times are at least 30 minute apart")
+      }
+      else {
         console.log(payload)
+
+        var url = 'https://hooks.zapier.com/hooks/catch/8405523/oawcn9w'
+        fetch(url, {
+          method: 'POST', // or 'PUT'
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
 
         document.getElementById("article_link").value = ""
         document.getElementById("article_title").value = ""

@@ -1,8 +1,13 @@
 body {
     min-width:400px;
-    min-height:300px
+    min-height:300px;
+    border-radius: 10px;
 }
 
 input {
     width: 90%;
-  }
+}
+
+#est {
+    font-weight: 800;
+}
