@@ -1,4 +1,13 @@
-
+function format_time_24_to_meridian(time) {
+  var [hours, minutes] = time.split(":")
+  if (hours == 0) hours = 12
+  if (hours > 12 ){
+    return `${hours - 12}:${minutes} PM`
+  }
+  else {
+    return `${hours}:${minutes} AM`
+  }
+}
 
 function times_good(times) {
   const MINUTES_APART = 30
@@ -13,7 +22,10 @@ function times_good(times) {
         var time_1 = hours_1 * 60 + minutes_1
         var time_2 = hours_2 * 60 + minutes_2
 
-        if (Math.abs(time_1 - time_2) < MINUTES_APART * 60) {
+        if (Math.abs(time_1 - time_2) < MINUTES_APART) {
+          console.log(time_1)
+          console.log(time_2)
+          console.log(Math.abs(time_1 - time_2))
           return false
         }
       }
@@ -72,6 +84,10 @@ document.addEventListener('DOMContentLoaded', function() {
         alert("Ensure times are at least 30 minute apart")
       }
       else {
+        payload.time_1 = format_time_24_to_meridian(time_1)
+        payload.time_2 = format_time_24_to_meridian(time_2)
+        payload.time_3 = format_time_24_to_meridian(time_3)
+
         console.log(payload)
 
         var url = 'https://hooks.zapier.com/hooks/catch/8405523/oawcn9w'
