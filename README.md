@@ -3,6 +3,8 @@
 Clone this repository with 
 `git clone https://github.com/ericchen99/Convo-Chrome-Extension.git`
 
+Navigate within the repository to find the `config.json` file. Update the contact information to your own.
+
 Navigate to 
 [chrome://extensions/](chrome://extensions/)
 
