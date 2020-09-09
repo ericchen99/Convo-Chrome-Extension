@@ -8,9 +8,9 @@
     "browser_action": {
      "default_popup": "popup.html"
     },
-    "icons": { "16": "convo_icon_16.png",
-        "48": "convo_icon_48.png",
-       "128": "convo_icon_128.png" },
+    "icons": { "16": "icons/convo_icon_16.png",
+        "48": "icons/convo_icon_48.png",
+       "128": "icons/convo_icon_128.png" },
     "permissions": [
      "activeTab"
     ],
