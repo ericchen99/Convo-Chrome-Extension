@@ -110,21 +110,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
         console.log(payload)
 
-        // const url = 'https://hooks.zapier.com/hooks/catch/8405523/oar14s8/'
-        // fetch(url, {
-        //   method: 'POST',
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //   },
-        //   body: JSON.stringify(payload),
-        // })
-        // .then(response => response.json())
-        // .then(data => {
-        //   console.log('Success:', data);
-        // })
-        // .catch((error) => {
-        //   console.error('Error:', error);
-        // });
+        const url = 'https://hooks.zapier.com/hooks/catch/8405523/oar14s8/'
+        fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
 
         document.getElementById("article_link").value = ""
         document.getElementById("article_title").value = ""
