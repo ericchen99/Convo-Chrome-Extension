@@ -16,7 +16,7 @@ function format_time_24_to_meridian(time) {
 }
 
 function times_good(times) {
-  const MINUTES_APART = 30
+  const MINUTES_APART = 15
   const date = new Date()
 
   const current_time = date.getHours() * 60 + date.getMinutes()
