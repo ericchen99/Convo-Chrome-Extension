@@ -31,20 +31,20 @@ function times_good(times) {
       return false;
     }
 
-    for (var idx_2 = 1; idx_2 < times.length; idx_2++) {
-      if (idx != idx_2) {
-        var [hours_2, minutes_2] = times[idx_2].split(":")
-        var time_2 = hours_2 * 60 + minutes_2
+    // for (var idx_2 = 1; idx_2 < times.length; idx_2++) {
+    //   if (idx != idx_2) {
+    //     var [hours_2, minutes_2] = times[idx_2].split(":")
+    //     var time_2 = hours_2 * 60 + minutes_2
 
-        if (Math.abs(time_1 - time_2) < MINUTES_APART) {
-          console.log(time_1)
-          console.log(time_2)
-          console.log(Math.abs(time_1 - time_2))
-          alert("Ensure times are at least 30 minute apart")
-          return false
-        }
-      }
-    }
+    //     if (Math.abs(time_1 - time_2) < MINUTES_APART) {
+    //       console.log(time_1)
+    //       console.log(time_2)
+    //       console.log(Math.abs(time_1 - time_2))
+    //       alert("Ensure times are at least 30 minute apart")
+    //       return false
+    //     }
+    //   }
+    // }
   }
   return true
 }
@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
       alert("Please fill in all fields")
       return
     }
+    article_title += "..."
 
     $.getJSON("config.json", function(json) {
       var name = json["Name"]
