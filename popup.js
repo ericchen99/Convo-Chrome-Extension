@@ -30,7 +30,6 @@ function times_good(times) {
       alert("Times must be at least 15 minutes after the current time")
       return false;
     }
-
     // for (var idx_2 = 1; idx_2 < times.length; idx_2++) {
     //   if (idx != idx_2) {
     //     var [hours_2, minutes_2] = times[idx_2].split(":")
@@ -75,6 +74,8 @@ document.addEventListener('DOMContentLoaded', function() {
       alert("Please fill in all fields")
       return
     }
+    article_title += "..."
+
     article_title += "..."
 
     $.getJSON("config.json", function(json) {
