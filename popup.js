@@ -30,21 +30,21 @@ function times_good(times) {
       alert("Times must be at least 15 minutes after the current time")
       return false;
     }
+    // // Ensure times are MINUTES_APART minutes apart
+    // for (var idx_2 = 1; idx_2 < times.length; idx_2++) {
+    //   if (idx != idx_2) {
+    //     var [hours_2, minutes_2] = times[idx_2].split(":")
+    //     var time_2 = hours_2 * 60 + minutes_2
 
-    for (var idx_2 = 1; idx_2 < times.length; idx_2++) {
-      if (idx != idx_2) {
-        var [hours_2, minutes_2] = times[idx_2].split(":")
-        var time_2 = hours_2 * 60 + minutes_2
-
-        if (Math.abs(time_1 - time_2) < MINUTES_APART) {
-          console.log(time_1)
-          console.log(time_2)
-          console.log(Math.abs(time_1 - time_2))
-          alert("Ensure times are at least 30 minute apart")
-          return false
-        }
-      }
-    }
+    //     if (Math.abs(time_1 - time_2) < MINUTES_APART) {
+    //       console.log(time_1)
+    //       console.log(time_2)
+    //       console.log(Math.abs(time_1 - time_2))
+    //       alert("Ensure times are at least 30 minute apart")
+    //       return false
+    //     }
+    //   }
+    // }
   }
   return true
 }
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
   checkPageButton.addEventListener('click', function() {
 
     var article_link = document.getElementById("article_link").value
-    var article_title = document.getElementById("article_title").value
+    var article_title = document.getElementById("article_title").value + "..."
     var time_1 = document.getElementById("time_1").value
     var time_2 = document.getElementById("time_2").value
     var time_3 = document.getElementById("time_3").value
