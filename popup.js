@@ -76,8 +76,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     article_title += "..."
 
-    article_title += "..."
-
     $.getJSON("config.json", function(json) {
       var name = json["Name"]
       var phone_number = json["Phone Number"]
