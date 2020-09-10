@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // the return variable should only have one entry
     var activeTab = tabs[0];
     document.getElementById("article_link").defaultValue = activeTab.url;
-    document.getElementById("article_title").defaultValue = activeTab.title;
+    document.getElementById("article_title").defaultValue = activeTab.title.substr(0, 32);
   });
 
 
