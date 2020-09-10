@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
   checkPageButton.addEventListener('click', function() {
 
     var article_link = document.getElementById("article_link").value
-    var article_title = document.getElementById("article_title").value + "..."
+    var article_title = document.getElementById("article_title").value
     var time_1 = document.getElementById("time_1").value
     var time_2 = document.getElementById("time_2").value
     var time_3 = document.getElementById("time_3").value
@@ -75,6 +75,8 @@ document.addEventListener('DOMContentLoaded', function() {
       alert("Please fill in all fields")
       return
     }
+
+    article_title += "..."
 
     $.getJSON("config.json", function(json) {
       var name = json["Name"]
