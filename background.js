@@ -46,3 +46,20 @@ messaging.onTokenRefresh(() => {
     console.log('onTokenRefresh error: ' + err);
     });
 });
+
+function send_notification(message) {
+  // Send a message to devices subscribed to the combination of topics
+    // specified by the provided condition.
+    messaging.messaging().send(message)
+      .then((response) => {
+        // Response is a message ID string.
+        console.log('Successfully sent message:', response);
+        document.getElementById("article_link").value = ""
+        document.getElementById("article_title").value  = ""
+        alert("submitted")
+      })
+      .catch((error) => {
+        console.log('Error sending message:', error);
+        alert("not submitted")
+      });
+}
