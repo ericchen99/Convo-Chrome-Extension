@@ -15,6 +15,12 @@ function format_time_24_to_meridian(time) {
   }
 }
 
+function ping_server() {
+  setTimeout(function () {
+    
+  }, 5000)
+}
+
 function times_good(times) {
   const MINUTES_APART = 15
   const date = new Date()
@@ -60,6 +66,22 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("article_title").defaultValue = activeTab.title.substr(0, 32);
   });
 
+  var notificationButton = document.getElementById('notification-button');
+  notificationButton.addEventListener('click', function() {
+    alert('click')
+
+    chrome.notifications.create(
+      '',{   
+      type: 'basic', 
+      iconUrl: 'icons/convo_icon_128.png', 
+      title: "Notification Title", 
+      message: "Notification Message!" 
+      },
+    
+    function() {} 
+    
+    );
+  })
 
   var checkPageButton = document.getElementById('submitForm');
   checkPageButton.addEventListener('click', function() {
