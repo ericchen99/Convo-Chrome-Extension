@@ -12,7 +12,9 @@
        "128": "icons/convo_icon_128.png" },
     "permissions": [
      "activeTab",
-     "notifications"
+     "notifications",
+     "https://www.gstatic.com/",
+    "https://www.gstatic.com/firebasejs/7.23.0/firebase.js"
     ],
     "content_scripts": [ 
         { 

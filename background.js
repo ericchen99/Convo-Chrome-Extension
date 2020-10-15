@@ -7,31 +7,42 @@ var firebaseConfig = {
   projectId: "push-extenstion-tests",
   storageBucket: "push-extenstion-tests.appspot.com",
   messagingSenderId: "423654782621",
-  appId: "1:423654782621:web:7fc5b42674fe4a26d7c674"
+  appId: "1:423654782621:web:719214cc7abaafd1d7c674",
+  measurementId: "G-J0PLHZ5PZ2"
 };
 firebase.initializeApp(firebaseConfig);
 
-/**
- * initApp handles setting up the Firebase context and registering
- * callbacks for the auth status.
- *
- * The core initialization is in firebase.App - this is the glue class
- * which stores configuration. We provide an app name here to allow
- * distinguishing multiple app instances.
- *
- * This method also registers a listener with firebase.auth().onAuthStateChanged.
- * This listener is called when the user is signed in or out, and that
- * is where we update the UI.
- *
- * When signed in, we also authenticate to the Firebase Realtime Database.
- */
-function initApp() {
-  // Listen for auth state changes.
-  firebase.auth().onAuthStateChanged(function(user) {
-    console.log('User state change detected from the Background script of the Chrome Extension:', user);
-  });
-}
+const messaging = firebase.messaging();
+console.log('messaging created');
+messaging.usePublicVapidKey("BG1vANsGXQth0tSTGuGW_L1aCvQHZtGEN3il3REii_WIeQP8hlBoCwmsaeGoqtAUMbwoSrV2GnEkmF8H34vzAJ8");
+console.log('key defined');
 
-window.onload = function() {
-  initApp();
-};
+// Get Instance ID token. Initially this makes a network call, once retrieved
+// subsequent calls to getToken will return from cache.
+messaging.getToken().then((currentToken) => {
+    console.log('getToken');
+    if (currentToken)
+    {
+        console.log('getToken success');
+        console.log(currentToken);
+    }
+    else
+    {
+        console.log('getToken failure');
+        // Show permission request.
+        console.log('No Instance ID token available. Request permission to generate one.');
+    }
+}).catch((err) => {
+    console.log('getToken error: ' + err);
+});
+
+
+// Callback fired if Instance ID token is updated.
+messaging.onTokenRefresh(() => {
+    console.log('onTokenRefresh');
+    messaging.getToken().then((refreshedToken) => {
+        console.log(currentToken);
+    }).catch((err) => {
+    console.log('onTokenRefresh error: ' + err);
+    });
+});
