@@ -1,5 +1,8 @@
-importScripts("https://www.gstatic.com/firebasejs/7.23.0/firebase.js");
-
+// Give the service worker access to Firebase Messaging.
+// Note that you can only use Firebase Messaging here. Other Firebase libraries
+// are not available in the service worker.
+importScripts('https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/7.23.0/firebase-messaging.js');
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -13,12 +16,8 @@ var firebaseConfig = {
   measurementId: "G-J0PLHZ5PZ2"
 };
 
-console.log('firebase:');
-console.log(firebase);
-
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-console.log('firebase initialized');
 
 // Retrieve Firebase Messaging object.
 const messaging = firebase.messaging();

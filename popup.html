@@ -3,7 +3,8 @@
   <head>
     <title>Conversation Starter</title>
     <script language="JavaScript" type="text/javascript" src="jquery.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-messaging.js"></script>
     <script src="notifications.js"></script>
     <script src="popup.js"></script>
     <link rel="stylesheet" href="popup.css">
@@ -13,16 +14,16 @@
     <!-- <button id="notification-button">notification</button> -->
     <form>
       <label for="article_title">Article Title</label><br>
-      <input type="text" id="article_title" name="article_title" required maxlength="32"><br>
+      <input type="text" id="article_title" name="article_title" required maxlength="63"><br>
 
       <label for="article_link">Article Link</label><br>
       <input type="text" id="article_link" name="article_link" required><br>
       
       <label for="content_header">Content Header</label><br>
-      <input type="text" id="content_header" name="content_header" required><br>
+      <input type="text" id="content_header" name="content_header" required maxlength="64"><br>
       
       <label for="intent">Intent</label><br>
-      <input type="text" id="intent" name="intent" required><br>
+      <input type="text" id="intent" name="intent" required maxlength="64"><br>
 
     </form> <br>
     <button id="submitForm">Submit!</button>

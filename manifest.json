@@ -13,8 +13,7 @@
     "permissions": [
      "activeTab",
      "notifications",
-     "https://www.gstatic.com/",
-    "https://www.gstatic.com/firebasejs/7.23.0/firebase.js"
+     "https://www.gstatic.com/"
     ],
     "content_scripts": [ 
         { 
