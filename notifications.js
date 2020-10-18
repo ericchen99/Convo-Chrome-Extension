@@ -1,4 +1,3 @@
-// TODO(DEVELOPER): Change the values below using values from the initialization snippet: Firebase Console > Overview > Add Firebase to your web app.
 // Initialize Firebase
 var firebaseConfig = {
   apiKey: "AIzaSyC-vgalyLYfif4sNlvZ5ADtgfiyCkv7bgM",
@@ -17,6 +16,8 @@ console.log('messaging created');
 messaging.usePublicVapidKey("BG1vANsGXQth0tSTGuGW_L1aCvQHZtGEN3il3REii_WIeQP8hlBoCwmsaeGoqtAUMbwoSrV2GnEkmF8H34vzAJ8");
 console.log('key defined');
 
+var USER_TOKEN = null
+
 // Get Instance ID token. Initially this makes a network call, once retrieved
 // subsequent calls to getToken will return from cache.
 messaging.getToken().then((currentToken) => {
@@ -25,6 +26,7 @@ messaging.getToken().then((currentToken) => {
     {
         console.log('getToken success');
         console.log(currentToken);
+        USER_TOKEN = currentToken
     }
     else
     {
@@ -42,6 +44,7 @@ messaging.onTokenRefresh(() => {
     console.log('onTokenRefresh');
     messaging.getToken().then((refreshedToken) => {
         console.log(currentToken);
+        USER_TOKEN = refreshedToken
     }).catch((err) => {
     console.log('onTokenRefresh error: ' + err);
     });

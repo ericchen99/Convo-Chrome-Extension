@@ -4,19 +4,26 @@
     <title>Conversation Starter</title>
     <script language="JavaScript" type="text/javascript" src="jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>
+    <script src="notifications.js"></script>
     <script src="popup.js"></script>
-    <script src="background.js"></script>
     <link rel="stylesheet" href="popup.css">
   </head>
   <body>
     <h1>I want to talk about this!</h1>
     <!-- <button id="notification-button">notification</button> -->
     <form>
-      <label for="article_title">Article Title (32 character limit)</label><br>
+      <label for="article_title">Article Title</label><br>
       <input type="text" id="article_title" name="article_title" required maxlength="32"><br>
 
       <label for="article_link">Article Link</label><br>
-      <input type="text" id="article_link" name="article_link" required><br><br>
+      <input type="text" id="article_link" name="article_link" required><br>
+      
+      <label for="content_header">Content Header</label><br>
+      <input type="text" id="content_header" name="content_header" required><br>
+      
+      <label for="intent">Intent</label><br>
+      <input type="text" id="intent" name="intent" required><br>
+
     </form> <br>
     <button id="submitForm">Submit!</button>
   </body>
