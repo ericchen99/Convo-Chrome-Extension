@@ -1,6 +1,5 @@
 {
     "manifest_version": 2,
-  
     "name": "Conversation Starter",
     "description": "This extension will allow you to denote interest in a conversation",
     "version": "1.0",
@@ -12,12 +11,16 @@
         "48": "icons/convo_icon_48.png",
        "128": "icons/convo_icon_128.png" },
     "permissions": [
-     "activeTab"
+     "activeTab",
+     "notifications",
+     "https://www.gstatic.com/"
     ],
     "content_scripts": [ 
         { 
             "js": [ "jquery.min.js"], 
-            "matches": [ "http://*/*", "https://*/*"] 
+            "matches": [ "http://*/*", "https://*/*"],
+            "permissions": ["<all_urls>"]
         }
-    ]
+    ],
+    "content_security_policy":"script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'"
   }
