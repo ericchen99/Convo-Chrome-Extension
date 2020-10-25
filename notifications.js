@@ -83,21 +83,22 @@ function retrieve_push_notif_body() {
     alert("Please fill in all fields");
     return null;
   }
-  article_title += "...";
 
   // Retrieve info from the config
+  // TODO debug this
   let name = "";
   $.getJSON("config.json", function(json) {
     name = json["Name"];
   })
 
   // Return an object containing retrieved values and updated names for server
+  // TODO replace `Eric` with `name`
   return {
-    "content_name": article_link,
-    "content_url": article_title,
+    "content_name": article_title,
+    "content_url": article_link,
     "topic": article_topic,
     "intent": intent,
-    "sender_name": name,
+    "sender_name": "Eric",
     "request_token": device_token
   };
 }
@@ -114,34 +115,31 @@ async function push_notification_to_server(body) {
 
   // Don't send a request if we didn't get an appropriate body
   if (body == null) { return; }
-  else {console.log(body); }
-
-  // Add params to post request
-  SERVER_URL += "?";
-  for (const [key, value] of Object.entries(body)) {
-    SERVER_URL += `${key}=${value}&`
-  }
-  SERVER_URL = SERVER_URL.slice(0, -1);
+  else { console.log(body); }
 
   // Attempt to send the request to the server
   try {
     const response = await fetch(SERVER_URL, {
       method: 'POST',
-      mode: 'cors', // no-cors, *cors, same-origin
-      credentials: 'same-origin', // include, *same-origin, omit
+      mode: 'cors',
+      credentials: 'same-origin',
       headers: {
         'Content-Type': 'application/json'
       },
+      body: JSON.stringify(body)
     });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     else {
-      let response = await response.json()
+      const response_json = await response.json()
 
-      // Do something with response
-      console.log(response)
+      // Log the response
+      console.log(response_json)
+
+      // Open the sender waiting room tab
+      chrome.tabs.create({url: response_json["waiting_room_url"]})
     }
   }
   catch(e) {
@@ -150,3 +148,7 @@ async function push_notification_to_server(body) {
     console.log(e)
   }
 }
+
+navigator.serviceWorker.addEventListener('message', event => {
+  console.log(event)
+});
