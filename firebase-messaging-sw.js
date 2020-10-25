@@ -19,13 +19,22 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+console.log("bleh")
+
 // Retrieve Firebase Messaging object.
 const messaging = firebase.messaging();
 messaging.usePublicVapidKey("BG1vANsGXQth0tSTGuGW_L1aCvQHZtGEN3il3REii_WIeQP8hlBoCwmsaeGoqtAUMbwoSrV2GnEkmF8H34vzAJ8");
 
+
+messaging.onMessage((payload) => {
+  console.log('Message received. ', payload);
+  // ...
+});
+
+// https://github.com/firebase/quickstart-js/issues/71
 messaging.setBackgroundMessageHandler(function(payload) {
   console.log('[firebase-messaging-sw.js] Received background message ', payload);
-  alert(payload)
+
   // Customize notification here
   chrome.notifications.create(
     '',{   
@@ -33,12 +42,21 @@ messaging.setBackgroundMessageHandler(function(payload) {
     iconUrl: 'icons/convo_icon_128.png', 
     title: "Notification Title", 
     message: "Notification Message!" 
-    },
-  
-  function() {} 
-  
+    }, () => {} 
   );
+
+  // Parse out info from the payload
+  let notificationTitle = "potato"
+  let notificationOptions = {
+
+  }
 
   return self.registration.showNotification(notificationTitle,
     notificationOptions);
 });
+
+// this.onpush = event => {
+//   console.dir(event.data.json());
+//   // Here you can use event.data to compose Notification
+//   // @see https://www.w3.org/TR/push-api/#pushmessagedata-interface
+// };
