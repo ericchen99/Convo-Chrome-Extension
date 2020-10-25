@@ -11,5 +11,10 @@ document.addEventListener('DOMContentLoaded', function() {
   submitButton.addEventListener('click', function() {
     let body = retrieve_push_notif_body();
     push_notification_to_server(body);
+
+    document.getElementById("article_link").value = "";
+    document.getElementById("article_title").value = "";
+    document.getElementById("article_topic").value = "";
+    document.getElementById("intent").value = "";
   }, false);
 }, false);

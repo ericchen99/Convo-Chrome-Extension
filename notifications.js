@@ -148,7 +148,3 @@ async function push_notification_to_server(body) {
     console.log(e)
   }
 }
-
-navigator.serviceWorker.addEventListener('message', event => {
-  console.log(event)
-});
