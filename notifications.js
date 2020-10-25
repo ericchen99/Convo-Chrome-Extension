@@ -87,9 +87,14 @@ function retrieve_push_notif_body() {
   // Retrieve info from the config
   // TODO debug this
   let name = "";
-  $.getJSON("config.json", function(json) {
-    name = json["Name"];
-  })
+  $.ajax({
+    url: "config.json",
+    async: false,
+    success: function(data) {
+      name = data["Name"]
+    }
+  });
+
 
   // Return an object containing retrieved values and updated names for server
   // TODO replace `Eric` with `name`

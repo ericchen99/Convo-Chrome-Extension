@@ -51,10 +51,6 @@ messaging.setBackgroundMessageHandler(function(payload) {
       {
         action: 'waiting_room',
         title: 'Join the waiting room'
-      },
-      {
-        action: 'view_article',
-        title: 'View the article'
       }
     ],
     requireInteraction: true
@@ -67,15 +63,9 @@ messaging.setBackgroundMessageHandler(function(payload) {
 
 
 self.addEventListener('notificationclick', function(event) {
-  console.log(event)
   event.notification.close();
   if (event.action === 'waiting_room') {
     console.log("waiting room tab create")
-    clients.openWindow(content_url)
-  }
-  if (event.action ==='view_article') {
-    console.log("article create")
-    clients.openWindow(content_url)
     clients.openWindow(receiver_waiting_room)
   }
 }, false);
