@@ -75,30 +75,36 @@ function retrieve_push_notif_body() {
   // Retrieve info from the form
   let article_link = document.getElementById("article_link").value;
   let article_title = document.getElementById("article_title").value;
-  let content_header = document.getElementById("content_header").value;
+  let article_topic = document.getElementById("article_topic").value;
   let intent = document.getElementById("intent").value;
   let device_token = USER_TOKEN;
 
-  if (article_link == "" || article_title == "" || content_header == "" || intent == "") {
+  if (article_link == "" || article_title == "" || article_topic == "" || intent == "") {
     alert("Please fill in all fields");
     return null;
   }
-  article_title += "...";
 
   // Retrieve info from the config
+  // TODO debug this
   let name = "";
-  $.getJSON("config.json", function(json) {
-    name = json["Name"];
-  })
+  $.ajax({
+    url: "config.json",
+    async: false,
+    success: function(data) {
+      name = data["Name"]
+    }
+  });
 
-  // Return an object containing retrieved values
+
+  // Return an object containing retrieved values and updated names for server
+  // TODO replace `Eric` with `name`
   return {
-    article_link,
-    article_title,
-    content_header,
-    intent,
-    name,
-    device_token
+    "content_name": article_title,
+    "content_url": article_link,
+    "topic": article_topic,
+    "intent": intent,
+    "sender_name": "Eric",
+    "request_token": device_token
   };
 }
 
@@ -110,30 +116,35 @@ function retrieve_push_notif_body() {
  * @param {*} body The result of a retrieve_push_notif_body call
  */
 async function push_notification_to_server(body) {
-  const SERVER_URL = "https://convo-starter-backend.herokuapp.com/api/sender_request/";
+  let SERVER_URL = "https://convo-starter-backend.herokuapp.com/api/sender_request/";
 
+  // Don't send a request if we didn't get an appropriate body
   if (body == null) { return; }
-  else {console.log(body); }
+  else { console.log(body); }
 
+  // Attempt to send the request to the server
   try {
     const response = await fetch(SERVER_URL, {
       method: 'POST',
-      mode: 'cors', // no-cors, *cors, same-origin
-      credentials: 'same-origin', // include, *same-origin, omit
+      mode: 'cors',
+      credentials: 'same-origin',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(body) // body data type must match "Content-Type" header
+      body: JSON.stringify(body)
     });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     else {
-      let response = await response.json()
+      const response_json = await response.json()
 
-      // Do something with response
-      console.log(response)
+      // Log the response
+      console.log(response_json)
+
+      // Open the sender waiting room tab
+      chrome.tabs.create({url: response_json["waiting_room_url"]})
     }
   }
   catch(e) {

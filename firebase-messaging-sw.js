@@ -19,26 +19,53 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+console.log("bleh")
+
 // Retrieve Firebase Messaging object.
 const messaging = firebase.messaging();
 messaging.usePublicVapidKey("BG1vANsGXQth0tSTGuGW_L1aCvQHZtGEN3il3REii_WIeQP8hlBoCwmsaeGoqtAUMbwoSrV2GnEkmF8H34vzAJ8");
 
+let content_url = ""
+let receiver_waiting_room = ""
+
+
+// https://github.com/firebase/quickstart-js/issues/71
 messaging.setBackgroundMessageHandler(function(payload) {
   console.log('[firebase-messaging-sw.js] Received background message ', payload);
-  alert(payload)
-  // Customize notification here
-  chrome.notifications.create(
-    '',{   
-    type: 'basic', 
-    iconUrl: 'icons/convo_icon_128.png', 
-    title: "Notification Title", 
-    message: "Notification Message!" 
-    },
-  
-  function() {} 
-  
-  );
+
+  const data = payload["data"]
+  const content_name = data["content_name"]
+  content_url = data["content_url"]
+  const intent = data["intent"]
+  const sender_name = data["sender_name"]
+  const topic = data["topic"]
+  receiver_waiting_room = data["receiver_waiting_room"]
+
+  // Parse out info from the payload
+  let notificationTitle = `${sender_name} wants to talk about ${topic}`
+  let notificationOptions = {
+    icon: 'icons/convo_icon_128.png',
+    silent: false,
+    body: `${content_name} with the intent of ${intent}`,
+    actions: [
+      {
+        action: 'waiting_room',
+        title: 'Join the waiting room'
+      }
+    ],
+    requireInteraction: true
+  }
+
 
   return self.registration.showNotification(notificationTitle,
     notificationOptions);
 });
+
+
+self.addEventListener('notificationclick', function(event) {
+  event.notification.close();
+  if (event.action === 'waiting_room') {
+    console.log("waiting room tab create")
+    clients.openWindow(receiver_waiting_room)
+  }
+}, false);
