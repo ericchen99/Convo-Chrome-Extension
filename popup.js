@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
   let submitButton = document.getElementById('submitForm');
   submitButton.addEventListener('click', function() {
     let body = retrieve_push_notif_body();
-    push_notification_to_server(body);
+    console.log(body)
+    // push_notification_to_server(body);
 
     document.getElementById("article_link").value = "";
     document.getElementById("article_title").value = "";
