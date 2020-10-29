@@ -42,11 +42,11 @@ messaging.setBackgroundMessageHandler(function(payload) {
   receiver_waiting_room = data["receiver_waiting_room"]
 
   // Parse out info from the payload
-  let notificationTitle = `${sender_name} wants to talk about ${topic}`
+  let notificationTitle = `${sender_name} wants to talk about ${topic}!`
   let notificationOptions = {
     icon: 'icons/convo_icon_128.png',
     silent: false,
-    body: `${content_name} with the intent of ${intent}`,
+    body: `${sender_name} wants to ${intent} about ${content_name}`,
     actions: [
       {
         action: 'waiting_room',
@@ -64,8 +64,6 @@ messaging.setBackgroundMessageHandler(function(payload) {
 
 self.addEventListener('notificationclick', function(event) {
   event.notification.close();
-  if (event.action === 'waiting_room') {
-    console.log("waiting room tab create")
-    clients.openWindow(receiver_waiting_room)
-  }
+  console.log("waiting room tab create")
+  clients.openWindow(receiver_waiting_room)
 }, false);

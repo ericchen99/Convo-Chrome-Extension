@@ -19,11 +19,21 @@
       <label for="article_link">Article Link</label><br>
       <input type="text" id="article_link" name="article_link" required><br>
       
-      <label for="article_topic">Topic</label><br>
-      <input type="text" id="article_topic" name="article_topic" required maxlength="64"><br>
+      <label for="article_topic">Content Topic</label><br>
+      <select type="text" id="article_topic" name="article_topic" required maxlength="64">
+        <option value="tech">Tech</option>
+        <option value="entertainment">Entertainment</option>
+        <option value="politics">Politics</option>
+        <option value="sport">Sport</option>
+        <option value="science">Science</option>
+      </select><br>
       
-      <label for="intent">Intent</label><br>
-      <input type="text" id="intent" name="intent" required maxlength="64"><br>
+      <label for="intent">What do you want to achieve?</label><br>
+      <select type="text" id="intent" name="intent" required maxlength="64">
+        <option value="brainstorm">Brainstorm</option>
+        <option value="discuss">Discussion</option>
+        <option value="learn">Learning</option>
+      </select><br>
 
     </form> <br>
     <button id="submitForm">Submit!</button>
