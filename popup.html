@@ -2,30 +2,38 @@
 <html>
   <head>
     <title>Conversation Starter</title>
-    <script src="popup.js"></script>
     <script language="JavaScript" type="text/javascript" src="jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-messaging.js"></script>
+    <script src="notifications.js"></script>
+    <script src="popup.js"></script>
     <link rel="stylesheet" href="popup.css">
   </head>
   <body>
     <h1>I want to talk about this!</h1>
+    <!-- <button id="notification-button">notification</button> -->
     <form>
-      <label for="article_title">Article Title (32 character limit)</label><br>
-      <input type="text" id="article_title" name="article_title" required maxlength="32"><br>
+      <label for="article_title">Article Title</label><br>
+      <input type="text" id="article_title" name="article_title" required maxlength="63"><br>
 
       <label for="article_link">Article Link</label><br>
-      <input type="text" id="article_link" name="article_link" required><br><br>
-
-      <span>Choose 3 times where you will be free for 30 minutes today. This is in </span> <span id="est">EST</span><br>
-
-      <label for="time_1">Time 1</label><br>
-      <input type="time" id="time_1" name="time_1" required step="900"><br>
-
-      <label for="time_2">Time 2</label><br>
-      <input type="time" id="time_2" name="time_2" required step="900"><br>
-
-      <label for="time_3">Time 3</label><br>
-      <input type="time" id="time_3" name="time_3" required step="900"><br>
-
+      <input type="text" id="article_link" name="article_link" required><br>
+      
+      <label for="article_topic">Content Topic</label><br>
+      <select type="text" id="article_topic" name="article_topic" required maxlength="64">
+        <option value="tech">Tech</option>
+        <option value="entertainment">Entertainment</option>
+        <option value="politics">Politics</option>
+        <option value="sport">Sport</option>
+        <option value="science">Science</option>
+      </select><br>
+      
+      <label for="intent">What do you want to achieve?</label><br>
+      <select type="text" id="intent" name="intent" required maxlength="64">
+        <option value="brainstorm">Brainstorm</option>
+        <option value="discuss">Discussion</option>
+        <option value="learn">Learning</option>
+      </select><br>
 
     </form> <br>
     <button id="submitForm">Submit!</button>
